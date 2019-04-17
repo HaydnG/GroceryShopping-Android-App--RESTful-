@@ -1,8 +1,8 @@
-package HaydnG.co.uk;
+package uk.co.HaydnG;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.uk.R;
@@ -34,6 +33,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Intent intent = getIntent();
+
+
         DrawerList = (ListView)findViewById(R.id.navList);
         DrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         ActivityTitle = getTitle().toString();
@@ -52,9 +54,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
+        String[] osArray = { "Shopping Cart", "Orders", "Logout"};
         Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         DrawerList.setAdapter(Adapter);
+        DrawerList.setHeaderDividersEnabled(true);
+        DrawerList.setFooterDividersEnabled(true);
 
         DrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
