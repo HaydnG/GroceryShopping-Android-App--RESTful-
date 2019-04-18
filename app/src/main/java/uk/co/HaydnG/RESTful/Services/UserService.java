@@ -1,6 +1,7 @@
 package uk.co.HaydnG.RESTful.Services;
 
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import uk.co.HaydnG.DTO.DTOConverter;
@@ -13,10 +14,10 @@ import uk.co.HaydnG.RESTful.UrlReaderCallback;
 
 public class UserService implements UrlReaderCallback {
 
-    private MainActivity Main;
+    private AppCompatActivity Main;
     private String password = null;
 
-    public UserService (MainActivity m){
+    public UserService (AppCompatActivity m){
         this.Main = m;
 
     }

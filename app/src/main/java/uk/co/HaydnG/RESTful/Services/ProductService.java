@@ -1,9 +1,13 @@
 package uk.co.HaydnG.RESTful.Services;
 
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import uk.co.HaydnG.DTO.DTOConverter;
+import uk.co.HaydnG.DTO.ProductDTO;
 import uk.co.HaydnG.DTO.UserDTO;
 import uk.co.HaydnG.HomeActivity;
 import uk.co.HaydnG.MainActivity;
@@ -12,11 +16,12 @@ import uk.co.HaydnG.RESTful.UrlReaderCallback;
 
 public class ProductService implements UrlReaderCallback {
 
-    private MainActivity Main;
+    private AppCompatActivity Main;
     private UserDTO User;
 
-    public ProductService(MainActivity m, UserDTO User){
+    public ProductService(AppCompatActivity m, UserDTO User){
         this.Main = m;
+        this.User = User;
 
     }
 
@@ -56,13 +61,14 @@ public class ProductService implements UrlReaderCallback {
                 default:
                     DTOConverter Parser = new DTOConverter();
 
-                    UserDTO User = Parser.JsonTOUserDTO(result);
+                    ArrayList<ProductDTO> Products = Parser.JsonArrayToProductDTOArray(result);
 
                     if (User != null) {
-                        System.out.println("UserDTO: " + User.getFName() + " " + User.getLName());
 
-                        Intent intent = new Intent(Main, HomeActivity.class);
-                        Main.startActivity(intent);
+                        for(ProductDTO p : Products){
+                            System.out.println("\n ProductName: " + p.getName());
+
+                        }
 
 
                     }

@@ -1,8 +1,11 @@
 package uk.co.HaydnG.DTO;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class DTOConverter {
 
@@ -47,4 +50,50 @@ public class DTOConverter {
 
         return User;
     }
+
+    public ArrayList<ProductDTO> JsonArrayToProductDTOArray(String Json){
+        ArrayList<ProductDTO> Products = new ArrayList<ProductDTO>();
+
+        if(Json == null){
+            return null;
+        }
+
+        try {
+            JSONArray JArray = new JSONArray(Json);
+            for(int i = 0; i < JArray.length();i++){
+                JSONObject Jproduct = JArray.getJSONObject(i);
+                ProductDTO product = new ProductDTO();
+
+                product.setID(Jproduct.getInt("ID"));
+                product.setDescription(Jproduct.getString("description"));
+                product.setDisabled(Jproduct.getBoolean("disabled"));
+                product.setLongName(Jproduct.getString("longName"));
+                product.setName(Jproduct.getString("name"));
+                product.setNumInCart(Jproduct.getInt("numInCart"));
+                product.setPrice(Jproduct.getDouble("price"));
+
+                JSONObject JStore = Jproduct.getJSONObject("store");
+                StoreDTO store = new StoreDTO();
+                store.setID(JStore.getInt("ID"));
+                store.setName(JStore.getString("name"));
+
+                product.setStore(store);
+
+                Products.add(product);
+
+
+            }
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+        return Products;
+    }
+
 }

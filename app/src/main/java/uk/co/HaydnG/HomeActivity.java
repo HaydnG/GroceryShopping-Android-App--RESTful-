@@ -19,6 +19,9 @@ import com.example.uk.R;
 
 import java.lang.reflect.Field;
 
+import uk.co.HaydnG.DTO.UserDTO;
+import uk.co.HaydnG.RESTful.Services.ProductService;
+
 public class HomeActivity extends AppCompatActivity {
 
     private ListView DrawerList;
@@ -27,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle DrawerToggle;
     private String ActivityTitle;
     private boolean open = false;
+    private UserDTO User = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Intent intent = getIntent();
+        User = (UserDTO) intent.getParcelableExtra("User");
+
+        ProductService PS = new ProductService(this ,User);
+        PS.GetProducts("apple", -1);
 
 
         DrawerList = (ListView)findViewById(R.id.navList);
