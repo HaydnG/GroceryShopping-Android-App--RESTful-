@@ -16,10 +16,10 @@ import uk.co.HaydnG.RESTful.UrlReaderCallback;
 
 public class ProductService implements UrlReaderCallback {
 
-    private AppCompatActivity Main;
+    private HomeActivity Main;
     private UserDTO User;
 
-    public ProductService(AppCompatActivity m, UserDTO User){
+    public ProductService(HomeActivity m, UserDTO User){
         this.Main = m;
         this.User = User;
 
@@ -64,6 +64,7 @@ public class ProductService implements UrlReaderCallback {
                     ArrayList<ProductDTO> Products = Parser.JsonArrayToProductDTOArray(result);
 
                     if (User != null) {
+                        Main.loadProductList(Products);
 
                         for(ProductDTO p : Products){
                             System.out.println("\n ProductName: " + p.getName());
