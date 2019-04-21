@@ -8,6 +8,16 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,10 +38,11 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/product_view"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        android:foregroundGravity="center_horizontal"/>
 
 </android.support.v4.widget.DrawerLayout>
 

@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 
 public class ServiceController extends AsyncTask<String, Void, String> {
@@ -15,6 +16,8 @@ public class ServiceController extends AsyncTask<String, Void, String> {
     private static final String HOST = "http://192.168.0.6:8080/ShoppingSystem/API/";
 
     public final String GET = "GET";
+    public final String POST = "POST";
+    private AppCompatActivity Main;
 
     @Override
     protected String doInBackground(String... strings){
@@ -26,13 +29,11 @@ public class ServiceController extends AsyncTask<String, Void, String> {
         StringBuffer content = null;
         String basicAuth = String.format("Basic %s", Base64.encodeToString((strings[1] + ":" + strings[2]).getBytes(),Base64.NO_WRAP));
 
-        System.out.println(basicAuth);
-
-
         try {
             url = new URL(HOST + strings[0]);
             con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod(strings[3]);
+
             con.setRequestProperty("Authorization", basicAuth);
             status = con.getResponseCode();
 
@@ -70,10 +71,11 @@ public class ServiceController extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result)
     {
         // communicates the result back via the UrlReaderCallback interface
-        mCallback.onUrlReaderFinished(result);
+        mCallback.StatusCodeHandler(result, Main);
     }
 
-    public ServiceController(UrlReaderCallback callback){
+    public ServiceController(UrlReaderCallback callback, AppCompatActivity main){
+
         mCallback = callback;
     }
 
