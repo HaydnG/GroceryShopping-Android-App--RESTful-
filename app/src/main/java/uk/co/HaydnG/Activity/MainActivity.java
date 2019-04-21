@@ -1,4 +1,4 @@
-package uk.co.HaydnG;
+package uk.co.HaydnG.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import com.example.uk.R;
 import uk.co.HaydnG.RESTful.Services.UserService;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ActivityTemplate {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +35,5 @@ public class MainActivity extends AppCompatActivity {
             US.Login(username.getText().toString(), password.getText().toString());
 
         }
-
-
-
-
-
     }
-
 }

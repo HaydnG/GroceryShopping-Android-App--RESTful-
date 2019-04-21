@@ -1,16 +1,11 @@
 package uk.co.HaydnG.RESTful.Services;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 import uk.co.HaydnG.DTO.DTOConverter;
 import uk.co.HaydnG.DTO.ProductDTO;
 import uk.co.HaydnG.DTO.UserDTO;
-import uk.co.HaydnG.HomeActivity;
-import uk.co.HaydnG.MainActivity;
+import uk.co.HaydnG.Activity.HomeActivity;
 import uk.co.HaydnG.RESTful.ServiceController;
 import uk.co.HaydnG.RESTful.UrlReaderCallback;
 

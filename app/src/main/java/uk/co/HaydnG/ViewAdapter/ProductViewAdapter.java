@@ -1,5 +1,6 @@
 package uk.co.HaydnG.ViewAdapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -19,7 +20,9 @@ import com.example.uk.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.HaydnG.Activity.ActivityTemplate;
 import uk.co.HaydnG.DTO.ProductDTO;
+import uk.co.HaydnG.RESTful.Services.CountCartProdService;
 import uk.co.HaydnG.ViewHolder.ProductViewHolder;
 
 public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewHolder>{
@@ -32,7 +35,7 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewHolder>{
 
     public ProductAdapterListener listener;
 
-    private AppCompatActivity activity;
+    private ActivityTemplate activity;
 
     public View.OnClickListener AddToCartListener;
     public View.OnClickListener RemoveFromCartListener;
@@ -40,10 +43,10 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewHolder>{
 
 
 
-    public ProductViewAdapter(List<ProductDTO> products, Context mContext, LayoutInflater inflater, ProductAdapterListener listener) {
+    public ProductViewAdapter(List<ProductDTO> products, ActivityTemplate activity, ProductAdapterListener listener) {
         Products = products;
-        this.mContext = mContext;
-        this.inflater = inflater;
+        this.mContext = activity.getApplicationContext();
+        this.inflater = activity.getLayoutInflater();
         this.activity = activity;
         this.listener = listener;
     }
@@ -70,9 +73,13 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewHolder>{
 
         ProductDTO product = this.Products.get(position);
 
+
         productViewHolder.ProductName.setText(product.getName());
-        productViewHolder.ProductPrice.setText(String.valueOf(product.getPrice()));
-        productViewHolder.ProductNumInCart.setText(String.valueOf(product.getNumInCart()));
+        productViewHolder.ProductPrice.setText("£ "+ String.valueOf(product.getPrice()));
+
+        CountCartProdService CountProd = new CountCartProdService(activity, activity.getUser(), productViewHolder.ProductNumInCart).GetCount(product.getID());
+
+
 
 
         productViewHolder.ProductNumInCart.setId(product.getID());

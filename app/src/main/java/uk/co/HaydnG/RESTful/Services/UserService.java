@@ -2,22 +2,21 @@ package uk.co.HaydnG.RESTful.Services;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
+import uk.co.HaydnG.Activity.ActivityTemplate;
 import uk.co.HaydnG.DTO.DTOConverter;
 import uk.co.HaydnG.DTO.PasswordDTO;
 import uk.co.HaydnG.DTO.UserDTO;
-import uk.co.HaydnG.HomeActivity;
-import uk.co.HaydnG.MainActivity;
+import uk.co.HaydnG.Activity.HomeActivity;
 import uk.co.HaydnG.RESTful.ServiceController;
 import uk.co.HaydnG.RESTful.UrlReaderCallback;
 
 public class UserService extends UrlReaderCallback {
 
-    private AppCompatActivity Main;
+    private ActivityTemplate Main;
     private String password = null;
 
-    public UserService (AppCompatActivity m){
+    public UserService (ActivityTemplate m){
         this.Main = m;
 
     }

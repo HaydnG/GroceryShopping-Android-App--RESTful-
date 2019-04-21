@@ -43,67 +43,67 @@
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/placeholder" />
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/product_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="0dp"
-                    android:text="TextView"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:text="£10.0" />
-
-                <Button
-                    android:id="@+id/product_Removefromcart"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="0dp"
-                    android:background="@color/add"
-                    android:text="➖"
-                    android:textAllCaps="false"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/product_cartNum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginRight="0dp"
-                    android:layout_marginBottom="0dp"
-                    android:text="TextView"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:text="5" />
+                android:layout_height="match_parent">
 
                 <Button
                     android:id="@+id/product_Addtocart"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="0dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="12dp"
                     android:background="@color/remove"
                     android:text="➕"
                     android:textAllCaps="false"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/product_cartNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="21dp"
+                    android:text="TextView"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/product_Addtocart"
+                    tools:text="5" />
+
+                <Button
+                    android:id="@+id/product_Removefromcart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@color/add"
+                    android:text="➖"
+                    android:textAllCaps="false"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/product_cartNum" />
+
+                <TextView
+                    android:id="@+id/product_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="21dp"
+                    android:text="TextView"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="£10.0" />
+            </android.support.constraint.ConstraintLayout>
+
         </LinearLayout>
 
     </RelativeLayout>
