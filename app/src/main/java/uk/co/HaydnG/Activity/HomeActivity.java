@@ -4,23 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.uk.R;
 
 import java.util.ArrayList;
 
+import uk.co.HaydnG.Activity.Template.ActivityTemplate;
+import uk.co.HaydnG.Activity.Template.ProdActivityTemplate;
 import uk.co.HaydnG.DTO.ProductDTO;
 import uk.co.HaydnG.DTO.UserDTO;
 import uk.co.HaydnG.Navigation.Navigation;
-import uk.co.HaydnG.RESTful.Services.CountCartProdService;
-import uk.co.HaydnG.RESTful.Services.ModifyCartService;
 import uk.co.HaydnG.RESTful.Services.GetProductsService;
 import uk.co.HaydnG.ViewAdapter.ProductViewAdapter;
 
-public class HomeActivity extends ActivityTemplate  {
+public class HomeActivity extends ProdActivityTemplate {
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -49,43 +46,13 @@ public class HomeActivity extends ActivityTemplate  {
 
     }
 
-
+    @Override
     public void loadProductList(final ArrayList<ProductDTO> products) {
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ProductViewAdapter padapter = new ProductViewAdapter(products,HomeActivity.this, new ProductViewAdapter.ProductAdapterListener(){
-
-                    @Override
-                    public void AddToCartOnClick(View v, int position) {
-                        ProductDTO product = products.get(position);
-                        ModifyCartService PS = new ModifyCartService(HomeActivity.this, getUser());
-
-                        PS.ModifyCart(product.getID(), PS.INCREMENT_CART);
-
-                        TextView CartNumText = (TextView) v.getTag();
-                        CountCartProdService CountCart = new CountCartProdService(HomeActivity.this, getUser(), CartNumText).GetCount(product.getID());
-
-                        if(product.getNumInCart() == 0){
-                            Toast.makeText(HomeActivity.this, "Added " + product.getName() + " to cart! ", Toast.LENGTH_SHORT).show();
-
-                        }else{
-                            Toast.makeText(HomeActivity.this, "+1 " + product.getName() + " in cart!" , Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void RemoveFromCartOnClick(View v, int position) {
-                        ProductDTO product = products.get(position);
-                        ModifyCartService PS = new ModifyCartService(HomeActivity.this, getUser());
-
-                        PS.ModifyCart(product.getID(), PS.DECREMENT_CART);
-
-                        TextView CartNumText = (TextView) v.getTag();
-                        CountCartProdService CountCart = new CountCartProdService(HomeActivity.this, getUser(), CartNumText).GetCount(product.getID());
-                    }
-                });
+                ProductViewAdapter padapter = new ProductViewAdapter(products,HomeActivity.this, R.layout.product);
                 recyclerView.setAdapter(padapter);
             }
         });

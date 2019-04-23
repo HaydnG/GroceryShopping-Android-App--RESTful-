@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.uk.R;
 
+import uk.co.HaydnG.Activity.Template.ActivityTemplate;
 import uk.co.HaydnG.RESTful.Services.UserService;
 
 

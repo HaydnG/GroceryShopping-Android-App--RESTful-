@@ -2,9 +2,8 @@ package uk.co.HaydnG.RESTful.Services;
 
 import android.widget.TextView;
 
-import uk.co.HaydnG.Activity.ActivityTemplate;
+import uk.co.HaydnG.Activity.Template.ActivityTemplate;
 import uk.co.HaydnG.DTO.UserDTO;
-import uk.co.HaydnG.Activity.HomeActivity;
 import uk.co.HaydnG.RESTful.ServiceController;
 import uk.co.HaydnG.RESTful.UrlReaderCallback;
 

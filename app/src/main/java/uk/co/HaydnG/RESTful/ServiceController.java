@@ -44,21 +44,23 @@ public class ServiceController extends AsyncTask<String, Void, String> {
                 con.setRequestProperty("Authorization", basicAuth);
             }
 
-            con.setRequestProperty("Accept", "application/json");
-            con.setRequestProperty("User-Agent", "Java client");
-            con.setDoOutput(true);
-            con.setDoInput(true);
-
-            con.setRequestProperty("Content-Type", "application/json");
 
             System.out.println("RequestType: " + strings[2]);
             if (strings[2].equals(this.POST)) {
-
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestProperty("User-Agent", "Java client");
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("Accept", "application/json");
 
                 OutputStream os = con.getOutputStream();
                 System.out.println(strings[3]);
                 byte[] input = strings[3].getBytes();
                 os.write(input, 0, input.length);
+            }else{
+
+                status = con.getResponseCode();
+                System.out.println("STATUS CODE: " + status);
             }
 
             in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -70,8 +72,7 @@ public class ServiceController extends AsyncTask<String, Void, String> {
             }
             in.close();
 
-            status = con.getResponseCode();
-            System.out.println("STATUS CODE: " + status);
+
 
             con.disconnect();
 

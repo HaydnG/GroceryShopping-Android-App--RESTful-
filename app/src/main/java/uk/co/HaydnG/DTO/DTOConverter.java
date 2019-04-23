@@ -75,7 +75,6 @@ public class DTOConverter {
                 JSONObject JStore = Jproduct.getJSONObject("store");
                 StoreDTO store = new StoreDTO();
                 store.setID(JStore.getInt("ID"));
-                store.setName(JStore.getString("name"));
 
                 product.setStore(store);
 

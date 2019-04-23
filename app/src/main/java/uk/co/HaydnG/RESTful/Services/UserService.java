@@ -1,9 +1,8 @@
 package uk.co.HaydnG.RESTful.Services;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 
-import uk.co.HaydnG.Activity.ActivityTemplate;
+import uk.co.HaydnG.Activity.Template.ActivityTemplate;
 import uk.co.HaydnG.DTO.DTOConverter;
 import uk.co.HaydnG.DTO.PasswordDTO;
 import uk.co.HaydnG.DTO.UserDTO;

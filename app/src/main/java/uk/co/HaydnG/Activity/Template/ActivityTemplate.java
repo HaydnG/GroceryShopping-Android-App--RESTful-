@@ -1,4 +1,4 @@
-package uk.co.HaydnG.Activity;
+package uk.co.HaydnG.Activity.Template;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;

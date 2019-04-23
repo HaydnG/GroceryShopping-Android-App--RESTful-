@@ -1,7 +1,6 @@
 package uk.co.HaydnG.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -9,11 +8,11 @@ import android.widget.Toast;
 
 import com.example.uk.R;
 
+import uk.co.HaydnG.Activity.Template.ActivityTemplate;
 import uk.co.HaydnG.DTO.AddressDTO;
 import uk.co.HaydnG.DTO.PasswordDTO;
 import uk.co.HaydnG.DTO.UserDTO;
 import uk.co.HaydnG.RESTful.Services.RegisterService;
-import uk.co.HaydnG.RESTful.Services.UserService;
 
 
 public class RegisterActivity extends ActivityTemplate {

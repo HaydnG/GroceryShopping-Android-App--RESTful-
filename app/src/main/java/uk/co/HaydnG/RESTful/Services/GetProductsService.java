@@ -2,20 +2,21 @@ package uk.co.HaydnG.RESTful.Services;
 
 import java.util.ArrayList;
 
+import uk.co.HaydnG.Activity.Template.ActivityTemplate;
+import uk.co.HaydnG.Activity.Template.ProdActivityTemplate;
 import uk.co.HaydnG.DTO.DTOConverter;
 import uk.co.HaydnG.DTO.ProductDTO;
 import uk.co.HaydnG.DTO.UserDTO;
-import uk.co.HaydnG.Activity.HomeActivity;
 import uk.co.HaydnG.RESTful.ServiceController;
 import uk.co.HaydnG.RESTful.UrlReaderCallback;
 
 public class GetProductsService extends UrlReaderCallback {
 
-    private HomeActivity Main;
+    private ProdActivityTemplate Main;
     private UserDTO User;
 
 
-    public GetProductsService(HomeActivity m, UserDTO User){
+    public GetProductsService(ProdActivityTemplate m, UserDTO User){
         this.Main = m;
         this.User = User;
 

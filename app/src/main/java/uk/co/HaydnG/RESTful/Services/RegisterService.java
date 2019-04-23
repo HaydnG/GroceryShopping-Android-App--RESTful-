@@ -1,15 +1,8 @@
 package uk.co.HaydnG.RESTful.Services;
 
-import android.content.Intent;
-
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
-import uk.co.HaydnG.Activity.ActivityTemplate;
-import uk.co.HaydnG.Activity.HomeActivity;
-import uk.co.HaydnG.DTO.DTOConverter;
-import uk.co.HaydnG.DTO.PasswordDTO;
+import uk.co.HaydnG.Activity.Template.ActivityTemplate;
 import uk.co.HaydnG.DTO.UserDTO;
 import uk.co.HaydnG.RESTful.ServiceController;
 import uk.co.HaydnG.RESTful.UrlReaderCallback;
@@ -28,6 +21,8 @@ public class RegisterService extends UrlReaderCallback {
         this.password = password;
         ServiceController SC = new ServiceController(this, Main);
 
+
+        User.getPassword().setPassword2(null);
         Gson g = new Gson();
 
 
