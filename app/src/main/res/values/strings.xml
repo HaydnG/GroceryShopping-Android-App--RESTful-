@@ -9,5 +9,18 @@
     <string name="settings">Settings</string>
     <string name="mycart">My Cart</string>
     <string name="home">Home</string>
+    <string name="logout">Logout</string>
+    <string name="register">Create an account</string>
+    <string name="email">Email</string>
+    <string name="reapeat_passwrd">Repeat Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="address">Street and street number</string>
+    <string name="city">City</string>
+    <string name="county">County</string>
+    <string name="postcode">Postcode</string>
+    <string name="register_complete">Register</string>
+    <string name="login_page">Already have an account?</string>
+    <string name="registration">Registration</string>
 
 </resources>

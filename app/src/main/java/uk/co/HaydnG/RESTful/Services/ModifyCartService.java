@@ -24,10 +24,10 @@ public class ModifyCartService extends UrlReaderCallback {
         ServiceController SC = new ServiceController(this, Main);
 
         if(Mode == INCREMENT_CART){
-            SC.execute("Cart/Increment/"+ProductID, this.User.getUsername(),this.User.getPassword().getPassword(), SC.POST);
+            SC.execute("Cart/Increment/"+ProductID, SC.AUTH,SC.PUT,this.User.getUsername(),this.User.getPassword().getPassword());
 
         }else if(Mode == DECREMENT_CART){
-            SC.execute("Cart/Decrement/"+ProductID, this.User.getUsername(),this.User.getPassword().getPassword(), SC.POST);
+            SC.execute("Cart/Decrement/"+ProductID, SC.AUTH,SC.PUT,this.User.getUsername(),this.User.getPassword().getPassword());
 
         }
 

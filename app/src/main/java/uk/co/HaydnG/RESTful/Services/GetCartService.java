@@ -24,7 +24,7 @@ public class GetCartService extends UrlReaderCallback {
         ServiceController SC = new ServiceController(this, Main);
 
 
-        SC.execute("Cart/Get", this.User.getUsername(),this.User.getPassword().getPassword(), SC.GET);
+        SC.execute("Cart/Get",SC.AUTH,SC.GET, this.User.getUsername(),this.User.getPassword().getPassword());
 
 
     }

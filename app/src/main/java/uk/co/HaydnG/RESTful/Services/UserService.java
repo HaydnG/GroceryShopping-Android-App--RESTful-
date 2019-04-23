@@ -25,7 +25,7 @@ public class UserService extends UrlReaderCallback {
         this.password = password;
         ServiceController SC = new ServiceController(this, Main);
 
-        SC.execute("User", username, password, SC.GET);
+        SC.execute("User",SC.AUTH,SC.GET, username, password);
     }
 
     @Override

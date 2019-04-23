@@ -19,4 +19,26 @@
         android:icon="@drawable/ic_shopping_cart_black_24dp"
         android:title="@string/mycart" />
 
+
+    <item
+        android:id="@+id/spacer"
+        android:title="" />
+    <item
+        android:id="@+id/spacer1"
+        android:title="" />
+    <item
+        android:id="@+id/spacer2"
+        android:title="" />
+    <item
+        android:id="@+id/spacer3"
+        android:title="" />
+
+
+
+
+    <item
+        android:id="@+id/loguut"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:title="@string/logout" />
+
 </menu>

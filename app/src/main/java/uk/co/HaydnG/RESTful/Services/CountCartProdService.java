@@ -27,7 +27,7 @@ public class CountCartProdService extends UrlReaderCallback {
     public CountCartProdService GetCount(int ProductID){
         ServiceController SC = new ServiceController(this, Main);
 
-        SC.execute("Cart/Get/"+ProductID, this.User.getUsername(),this.User.getPassword().getPassword(), SC.GET);
+        SC.execute("Cart/Get/"+ProductID,SC.AUTH, SC.GET,this.User.getUsername(),this.User.getPassword().getPassword());
 
         return this;
     }

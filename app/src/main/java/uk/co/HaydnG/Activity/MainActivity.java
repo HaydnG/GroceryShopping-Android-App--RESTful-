@@ -1,6 +1,6 @@
 package uk.co.HaydnG.Activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -20,7 +20,7 @@ public class MainActivity extends ActivityTemplate {
     }
 
     public void LoginOnClick(View view){
-        TextView username = (TextView) this.findViewById(R.id.Username);
+        TextView username = (TextView) this.findViewById(R.id.username);
         TextView password = (TextView) this.findViewById(R.id.Password);
         System.out.println(username.getText() + " "+ password.getText());
 
@@ -35,5 +35,10 @@ public class MainActivity extends ActivityTemplate {
             US.Login(username.getText().toString(), password.getText().toString());
 
         }
+    }
+
+    public void RegisterOnClick(View view){
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }
