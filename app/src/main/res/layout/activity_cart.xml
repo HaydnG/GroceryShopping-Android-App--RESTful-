@@ -99,13 +99,14 @@
                     </LinearLayout>
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/place_order"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:background="@color/button"
-                        android:text="Button" />
+                        android:onClick="PlaceOrder"
+                        android:text="Order" />
                 </LinearLayout>
 
             </LinearLayout>

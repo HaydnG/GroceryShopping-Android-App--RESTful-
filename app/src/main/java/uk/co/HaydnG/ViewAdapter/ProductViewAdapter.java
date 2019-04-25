@@ -148,7 +148,7 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewHolder>{
 
     }
 
-    public void UpdateCartFooter(int position){
+    public void UpdateCartFooter(){
         TextView products = (TextView) activity.findViewById(R.id.total_products);
         TextView productsprice = (TextView) activity.findViewById(R.id.total_cost);
 

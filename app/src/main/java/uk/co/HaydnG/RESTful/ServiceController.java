@@ -55,8 +55,8 @@ public class ServiceController extends AsyncTask<String, Void, String> {
 
 
                 OutputStream os = con.getOutputStream();
-                System.out.println(strings[3]);
-                byte[] input = strings[3].getBytes();
+                System.out.println(strings[5]);
+                byte[] input = strings[5].getBytes();
                 os.write(input, 0, input.length);
             }else{
 

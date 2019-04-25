@@ -65,7 +65,7 @@ public class CountCartProdService extends UrlReaderCallback {
                         TextView CartProdCost = (TextView) view.getTag(R.id.totalProdCost);
                         CartProdCost.setText("£" + (product.getPrice() * product.getNumInCart()));
 
-                        viewHolder.UpdateCartFooter(position);
+                        viewHolder.UpdateCartFooter();
 
                     } catch (NullPointerException e) {
                     }
