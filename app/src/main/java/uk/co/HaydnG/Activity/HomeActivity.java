@@ -26,7 +26,10 @@ public class HomeActivity extends ProdActivityTemplate {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         setNavigation(new Navigation(this, Navigation.HOME_ACTIVITY).SetupNaviugation());
+
+
         Intent intent = getIntent();
         setUser((UserDTO)intent.getParcelableExtra("User"));
 

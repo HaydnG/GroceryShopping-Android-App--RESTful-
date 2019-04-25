@@ -22,6 +22,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder  {
     public TextView ProductName;
     public TextView ProductPrice;
     public TextView ProductNumInCart;
+    public TextView TotalprodPrice;
 
     public Button AddToCart;
     public Button RemoveFromCart;
@@ -34,12 +35,19 @@ public class ProductViewHolder extends RecyclerView.ViewHolder  {
         super(itemView);
 
 
+
         this.ProductName = itemView.findViewById(R.id.product_name);
         this.ProductPrice = itemView.findViewById(R.id.product_price);
         this.ProductNumInCart = itemView.findViewById(R.id.product_cartNum);
-
         this.AddToCart = itemView.findViewById(R.id.product_Addtocart);
         this.RemoveFromCart = itemView.findViewById(R.id.product_Removefromcart);
+
+        try {
+
+            this.TotalprodPrice = itemView.findViewById(R.id.totalprod_price);
+
+
+        }catch(NullPointerException ex){ }
     }
 
 

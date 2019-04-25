@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.uk.R;
+
 import java.util.List;
 
-import uk.co.HaydnG.Activity.Template.ActivityTemplate;
+import uk.co.HaydnG.Activity.Template.ProdActivityTemplate;
 import uk.co.HaydnG.DTO.ProductDTO;
 import uk.co.HaydnG.RESTful.Services.CountCartProdService;
 import uk.co.HaydnG.RESTful.Services.ModifyCartService;
@@ -23,22 +25,22 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewHolder>{
 
 
 
-    private final List<ProductDTO> Products;
+    public final List<ProductDTO> Products;
     private final Context mContext;
     private final LayoutInflater inflater;
 
 
 
-    private ActivityTemplate activity;
+
+    public ProdActivityTemplate activity;
     private int LayoutID;
 
-    public View.OnClickListener AddToCartListener;
-    public View.OnClickListener RemoveFromCartListener;
 
+    public int getLayoutID() {
+        return LayoutID;
+    }
 
-
-
-    public ProductViewAdapter(List<ProductDTO> products, ActivityTemplate activity, int LaypoutID) {
+    public ProductViewAdapter(List<ProductDTO> products, ProdActivityTemplate activity, int LaypoutID) {
         Products = products;
         this.mContext = activity.getApplicationContext();
         this.inflater = activity.getLayoutInflater();
@@ -71,27 +73,31 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewHolder>{
 
 
         productViewHolder.ProductName.setText(product.getName());
+
+
         productViewHolder.ProductPrice.setText("£ "+ String.valueOf(product.getPrice()));
 
-        CountCartProdService CountProd = new CountCartProdService(activity, activity.getUser(), productViewHolder.ProductNumInCart).GetCount(product.getID());
+        productViewHolder.ProductNumInCart.setText(product.getNumInCart() + "");
+
+        try {
+            productViewHolder.TotalprodPrice.setText("£ " + String.valueOf(product.getPrice() * product.getNumInCart()));
+            productViewHolder.AddToCart.setTag(R.id.totalProdCost, productViewHolder.TotalprodPrice);
+            productViewHolder.RemoveFromCart.setTag(R.id.totalProdCost,productViewHolder.TotalprodPrice);
+
+        }catch (NullPointerException ex){}
+        productViewHolder.AddToCart.setTag(R.id.prod_price, product.getPrice());
+        productViewHolder.RemoveFromCart.setTag(R.id.prod_price,product.getPrice());
 
 
-
-
-        productViewHolder.ProductNumInCart.setId(product.getID());
-
-        productViewHolder.AddToCart.setTag(productViewHolder.ProductNumInCart);
+        productViewHolder.AddToCart.setTag(R.id.totalProdNum,productViewHolder.ProductNumInCart);
         productViewHolder.AddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AddToCartOnClick(v, position);
-
-
-
             }
         });
 
-        productViewHolder.RemoveFromCart.setTag(productViewHolder.ProductNumInCart);
+        productViewHolder.RemoveFromCart.setTag(R.id.totalProdNum,productViewHolder.ProductNumInCart);
         productViewHolder.RemoveFromCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,42 +105,73 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewHolder>{
             }
         });
 
+        new CountCartProdService(this, productViewHolder.AddToCart, product, position).GetCount();
 
 
-
-    }
-
-    public void AddItem(View v){
 
 
     }
+
 
     public void AddToCartOnClick(View v, int position) {
-        ProductDTO product = this.Products.get(position);
-        ModifyCartService PS = new ModifyCartService(activity, activity.getUser());
+        try {
 
-        PS.ModifyCart(product.getID(), PS.INCREMENT_CART);
+            ProductDTO product = this.Products.get(position);
+            ModifyCartService PS = new ModifyCartService(activity, activity.getUser());
 
-        TextView CartNumText = (TextView) v.getTag();
-        CountCartProdService CountCart = new CountCartProdService(activity, activity.getUser(), CartNumText).GetCount(product.getID());
+            PS.ModifyCart(product.getID(), PS.INCREMENT_CART);
 
-        if(product.getNumInCart() == 0){
-            Toast.makeText(activity, "Added " + product.getName() + " to cart! ", Toast.LENGTH_SHORT).show();
+            CountCartProdService CountCart = new CountCartProdService(this, v, product, position).GetCount();
 
-        }else{
-            Toast.makeText(activity, "+1 " + product.getName() + " in cart!" , Toast.LENGTH_SHORT).show();
-        }
+
+            if (product.getNumInCart() == 0) {
+                Toast.makeText(activity, "Added " + product.getName() + " to cart! ", Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(activity, "+1 " + product.getName() + " in cart!", Toast.LENGTH_SHORT).show();
+            }
+        }catch (IndexOutOfBoundsException i){}
     }
 
 
     public void RemoveFromCartOnClick(View v, int position) {
-        ProductDTO product = this.Products.get(position);
-        ModifyCartService PS = new ModifyCartService(activity, activity.getUser());
+        try {
 
-        PS.ModifyCart(product.getID(), PS.DECREMENT_CART);
+            ProductDTO product = this.Products.get(position);
+            ModifyCartService PS = new ModifyCartService(activity, activity.getUser());
 
-        TextView CartNumText = (TextView) v.getTag();
-        CountCartProdService CountCart = new CountCartProdService(activity, activity.getUser(), CartNumText).GetCount(product.getID());
+            PS.ModifyCart(product.getID(), PS.DECREMENT_CART);
+
+            CountCartProdService CountCart = new CountCartProdService(this, v, product, position).GetCount();
+        }catch (IndexOutOfBoundsException i){}
+
+
+    }
+
+    public void UpdateCartFooter(int position){
+        TextView products = (TextView) activity.findViewById(R.id.total_products);
+        TextView productsprice = (TextView) activity.findViewById(R.id.total_cost);
+
+        int prodcount = 0;
+        double prodtotal = 0;
+
+        for(ProductDTO prod : this.Products){
+            prodcount+=prod.getNumInCart();
+            prodtotal+=(prod.getPrice() * prod.getNumInCart());
+
+
+        }
+
+        products.setText(prodcount+"");
+        productsprice.setText("£"+ prodtotal);
+
+
+//        notifyItemRangeChanged(position,this.Products.size());
+//        notifyDataSetChanged();
+//        activity.recyclerView.getRecycledViewPool().clear();
+
+
+
     }
 
 

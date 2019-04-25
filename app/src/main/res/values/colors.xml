@@ -7,4 +7,6 @@
     <color name="remove">#970000</color>
     <color name="add">#1E7500</color>
     <color name="card">#4287FF</color>
+    <color name="cartback">#6D6D6D</color>
+    <color name="button">#FFB930</color>
 </resources>

@@ -53,6 +53,7 @@ public class ServiceController extends AsyncTask<String, Void, String> {
                 con.setRequestProperty("Content-Type", "application/json");
                 con.setRequestProperty("Accept", "application/json");
 
+
                 OutputStream os = con.getOutputStream();
                 System.out.println(strings[3]);
                 byte[] input = strings[3].getBytes();
