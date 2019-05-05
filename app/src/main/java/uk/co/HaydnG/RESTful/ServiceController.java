@@ -26,13 +26,11 @@ public class ServiceController extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings){
-
         URL url = null;
         HttpURLConnection con = null;
         int status = -1;
         BufferedReader in = null;
         StringBuffer content = null;
-
 
         try {
             url = new URL(HOST + strings[0]);
@@ -44,7 +42,6 @@ public class ServiceController extends AsyncTask<String, Void, String> {
                 con.setRequestProperty("Authorization", basicAuth);
             }
 
-
             System.out.println("RequestType: " + strings[2]);
             if (strings[2].equals(this.POST)) {
                 con.setDoOutput(true);
@@ -52,7 +49,6 @@ public class ServiceController extends AsyncTask<String, Void, String> {
                 con.setRequestProperty("User-Agent", "Java client");
                 con.setRequestProperty("Content-Type", "application/json");
                 con.setRequestProperty("Accept", "application/json");
-
 
                 OutputStream os = con.getOutputStream();
                 System.out.println(strings[5]);
@@ -72,24 +68,17 @@ public class ServiceController extends AsyncTask<String, Void, String> {
                 content.append(inputLine);
             }
             in.close();
-
-
-
             con.disconnect();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         if(content == null){
             return null;
 
         }else{
             return content.toString();
         }
-
-
     }
 
     @Override

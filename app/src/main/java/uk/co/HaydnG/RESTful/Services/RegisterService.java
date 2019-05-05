@@ -25,7 +25,6 @@ public class RegisterService extends UrlReaderCallback {
         User.getPassword().setPassword2(null);
         Gson g = new Gson();
 
-
         SC.execute("User/Register", SC.NO_AUTH,SC.POST,null, null ,g.toJson(User));
     }
 

@@ -37,7 +37,10 @@ public class CartActivity extends ProdActivityTemplate {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+
         setNavigation(new Navigation(this, Navigation.CART_ACTIVITY).SetupNaviugation());
+
         Intent intent = getIntent();
         setUser((UserDTO)intent.getParcelableExtra("User"));
 
