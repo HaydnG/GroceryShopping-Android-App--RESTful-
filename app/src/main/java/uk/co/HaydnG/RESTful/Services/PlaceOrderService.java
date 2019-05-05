@@ -1,10 +1,14 @@
 package uk.co.HaydnG.RESTful.Services;
 
+import android.content.Intent;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
+import uk.co.HaydnG.Activity.HomeActivity;
+import uk.co.HaydnG.Activity.OrderActivity;
 import uk.co.HaydnG.Activity.Template.ProdActivityTemplate;
 import uk.co.HaydnG.DTO.DTOConverter;
 import uk.co.HaydnG.DTO.OrderDTO;
@@ -47,8 +51,23 @@ public class PlaceOrderService extends UrlReaderCallback {
 
         if(result != null) {
             System.out.println("ECHO: " + result);
-            GetCartService GS = new GetCartService(Main ,Main.getUser());
-            GS.GetCart();
+
+            DTOConverter DTOCon = new DTOConverter();
+            OrderDTO Order = DTOCon.JsonArrayToOrderDTO(result);
+
+            if(Order.getOrderID() > 0){
+
+                Intent intent = new Intent(Main, OrderActivity.class);
+                intent.putExtra("Order", Order);
+                intent.putExtra("User", User);
+                Main.startActivity(intent);
+
+            }
+
+
+
+
+
         }
     }
 }

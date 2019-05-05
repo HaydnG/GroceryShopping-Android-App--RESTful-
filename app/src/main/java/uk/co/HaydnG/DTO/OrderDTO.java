@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package uk.co.HaydnG.DTO;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author haydn
  */
-public class OrderDTO {
+public class OrderDTO implements Parcelable {
     
     private UserDTO user;
     private Timestamp orderDate;
@@ -91,11 +94,44 @@ public class OrderDTO {
     public void setTotalProducts(int totalProducts) {
         this.totalProducts = totalProducts;
     }
-    
-    
-    
-    
-    
-  
-    
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.user, flags);
+        dest.writeSerializable(this.orderDate);
+        dest.writeInt(this.OrderID);
+        dest.writeList(this.OrderProducts);
+        dest.writeDouble(this.price);
+        dest.writeInt(this.productsAmount);
+        dest.writeInt(this.totalProducts);
+    }
+
+    protected OrderDTO(Parcel in) {
+        this.user = in.readParcelable(UserDTO.class.getClassLoader());
+        this.orderDate = (Timestamp) in.readSerializable();
+        this.OrderID = in.readInt();
+        this.OrderProducts = new ArrayList<ProductDTO>();
+        in.readList(this.OrderProducts, ProductDTO.class.getClassLoader());
+        this.price = in.readDouble();
+        this.productsAmount = in.readInt();
+        this.totalProducts = in.readInt();
+    }
+
+    public static final Creator<OrderDTO> CREATOR = new Creator<OrderDTO>() {
+        @Override
+        public OrderDTO createFromParcel(Parcel source) {
+            return new OrderDTO(source);
+        }
+
+        @Override
+        public OrderDTO[] newArray(int size) {
+            return new OrderDTO[size];
+        }
+    };
 }

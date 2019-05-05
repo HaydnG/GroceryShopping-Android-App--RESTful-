@@ -5,6 +5,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class DTOConverter {
@@ -80,11 +83,7 @@ public class DTOConverter {
 
                 Products.add(product);
 
-
             }
-
-
-
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -93,6 +92,38 @@ public class DTOConverter {
 
 
         return Products;
+    }
+
+    public OrderDTO JsonArrayToOrderDTO(String Json){
+
+
+        if(Json == null){
+            return null;
+        }
+
+        OrderDTO order = new OrderDTO();
+
+        try {
+            JSONObject Pojo = new JSONObject(Json);
+
+            SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+            order.setOrderDate(new Timestamp( SDF.parse(Pojo.getString("orderDate")).getTime()));
+            order.setOrderID(Pojo.getInt("orderID"));
+
+            JSONArray products = Pojo.getJSONArray("orderProducts");
+            order.setOrderProducts(JsonArrayToProductDTOArray(products.toString()));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        return order;
     }
 
 }

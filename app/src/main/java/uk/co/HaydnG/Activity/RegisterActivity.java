@@ -70,6 +70,9 @@ public class RegisterActivity extends ActivityTemplate {
                     RegisterService RS = new RegisterService(this);
                     RS.Register(User);
 
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+
                 }else{
                     Toast.makeText(getApplicationContext(), "Password must be longer than 6 characters", Toast.LENGTH_SHORT).show();
                 }

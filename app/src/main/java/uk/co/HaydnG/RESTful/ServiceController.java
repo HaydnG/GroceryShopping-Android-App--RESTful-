@@ -15,7 +15,7 @@ import android.util.Base64;
 public class ServiceController extends AsyncTask<String, Void, String> {
 
     private UrlReaderCallback mCallback = null;
-    private static final String HOST = "http://192.168.0.6:8080/ShoppingSystem/API/";
+    private static final String HOST = "http://192.168.0.88:8080/ShoppingSystem/API/";
 
     public static final String GET = "GET";
     public static final String POST = "POST";

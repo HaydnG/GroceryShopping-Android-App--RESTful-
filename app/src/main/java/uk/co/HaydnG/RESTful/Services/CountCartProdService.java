@@ -46,9 +46,12 @@ public class CountCartProdService extends UrlReaderCallback {
     @Override
     public void onUrlReaderFinished(String result) {
         if(result != null) {
-            TextView CartNumText = (TextView) view.getTag(R.id.totalProdNum);
 
-            CartNumText.setText(result);
+
+            try{
+                TextView CartNumText = (TextView) view.getTag(R.id.totalProdNum);
+                CartNumText.setText(result);
+            }catch (NullPointerException ex){}
 
             if(viewHolder.getLayoutID() == R.layout.cart_product){
                 product.setNumInCart(Integer.parseInt(result));

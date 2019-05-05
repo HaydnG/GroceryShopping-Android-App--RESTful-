@@ -28,7 +28,10 @@ public class GetProductsService extends UrlReaderCallback {
 
         ServiceController SC = new ServiceController(this, Main);
 
-        if(StoreID >= -1){
+        if(search.length() <= 0){
+            SC.execute("Product/All", SC.AUTH,SC.GET,this.User.getUsername(),this.User.getPassword().getPassword());
+
+        }else if(StoreID >= -1){
             SC.execute("Product/All/"+search, SC.AUTH,SC.GET,this.User.getUsername(),this.User.getPassword().getPassword());
 
         }else{

@@ -22,6 +22,10 @@
     <string name="register_complete">Register</string>
     <string name="login_page">Already have an account?</string>
     <string name="registration">Registration</string>
+    <string name="quantity">Quantity:</string>
+    <string name="cost">Cost:</string>
+    <string name="Total">Total:</string>
+    <string name="orderplaced">Order Placed:</string>
     <item type="id" name="totalProdCost" />
     <item type="id" name="totalProdNum" />
     <item type="id" name="prod_price" />

@@ -79,31 +79,39 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewHolder>{
 
         productViewHolder.ProductNumInCart.setText(product.getNumInCart() + "");
 
-        try {
+
+
+        try{
+
             productViewHolder.TotalprodPrice.setText("£ " + String.valueOf(product.getPrice() * product.getNumInCart()));
+        }catch (NullPointerException ex){}
+
+        try {
+
             productViewHolder.AddToCart.setTag(R.id.totalProdCost, productViewHolder.TotalprodPrice);
             productViewHolder.RemoveFromCart.setTag(R.id.totalProdCost,productViewHolder.TotalprodPrice);
 
+
+            productViewHolder.AddToCart.setTag(R.id.prod_price, product.getPrice());
+            productViewHolder.RemoveFromCart.setTag(R.id.prod_price,product.getPrice());
+
+
+            productViewHolder.AddToCart.setTag(R.id.totalProdNum,productViewHolder.ProductNumInCart);
+            productViewHolder.AddToCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AddToCartOnClick(v, position);
+                }
+            });
+
+            productViewHolder.RemoveFromCart.setTag(R.id.totalProdNum,productViewHolder.ProductNumInCart);
+            productViewHolder.RemoveFromCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RemoveFromCartOnClick(v, position);
+                }
+            });
         }catch (NullPointerException ex){}
-        productViewHolder.AddToCart.setTag(R.id.prod_price, product.getPrice());
-        productViewHolder.RemoveFromCart.setTag(R.id.prod_price,product.getPrice());
-
-
-        productViewHolder.AddToCart.setTag(R.id.totalProdNum,productViewHolder.ProductNumInCart);
-        productViewHolder.AddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddToCartOnClick(v, position);
-            }
-        });
-
-        productViewHolder.RemoveFromCart.setTag(R.id.totalProdNum,productViewHolder.ProductNumInCart);
-        productViewHolder.RemoveFromCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RemoveFromCartOnClick(v, position);
-            }
-        });
 
         new CountCartProdService(this, productViewHolder.AddToCart, product, position).GetCount();
 

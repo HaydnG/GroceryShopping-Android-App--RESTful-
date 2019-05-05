@@ -1,11 +1,12 @@
 package uk.co.HaydnG.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.uk.R;
@@ -14,74 +15,68 @@ import java.util.ArrayList;
 
 import uk.co.HaydnG.Activity.Template.ActivityTemplate;
 import uk.co.HaydnG.Activity.Template.ProdActivityTemplate;
+import uk.co.HaydnG.DTO.OrderDTO;
 import uk.co.HaydnG.DTO.ProductDTO;
 import uk.co.HaydnG.DTO.UserDTO;
 import uk.co.HaydnG.Navigation.Navigation;
-import uk.co.HaydnG.RESTful.Services.GetProductsService;
+import uk.co.HaydnG.RESTful.Services.GetCartService;
+import uk.co.HaydnG.RESTful.Services.PlaceOrderService;
 import uk.co.HaydnG.ViewAdapter.ProductViewAdapter;
 
-public class HomeActivity extends ProdActivityTemplate {
+public class OrderActivity extends ProdActivityTemplate {
 
+
+
+    private UserDTO User = null;
+    private OrderDTO Order = null;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    private ArrayList<ProductDTO> Products;
+
+    private Navigation nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
-        setNavigation(new Navigation(this, Navigation.HOME_ACTIVITY).SetupNaviugation());
-
-
+        setContentView(R.layout.activity_order);
+        setNavigation(new Navigation(this, Navigation.CART_ACTIVITY).SetupNaviugation());
         Intent intent = getIntent();
         setUser((UserDTO)intent.getParcelableExtra("User"));
+        Order = (OrderDTO) intent.getParcelableExtra("Order");
+
+
 
         recyclerView = findViewById(R.id.product_view);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new GridLayoutManager(this, 2);
+        layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
 
+        TextView orderdate = findViewById(R.id.order_date);
+        orderdate.setText(Order.getOrderDate().toString());
+
+        if(Order != null && Order.getOrderProducts() != null){
 
 
-
-        TextView search = findViewById(R.id.search_box);
-        GetProductsService PS = new GetProductsService(HomeActivity.this ,getUser());
-        PS.GetProducts("", -1);
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                GetProductsService PS = new GetProductsService(HomeActivity.this ,getUser());
-                PS.GetProducts(s.toString(), -1);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
-
-
-
+            loadProductList(Order.getOrderProducts());
+        }
 
 
     }
+
 
     @Override
     public void loadProductList(final ArrayList<ProductDTO> products) {
 
+
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ProductViewAdapter padapter = new ProductViewAdapter(products,HomeActivity.this, R.layout.product);
+                ProductViewAdapter padapter = new ProductViewAdapter(products,OrderActivity.this, R.layout.order_product);
+                padapter.UpdateCartFooter();
                 recyclerView.setAdapter(padapter);
             }
         });
     }
+
 }

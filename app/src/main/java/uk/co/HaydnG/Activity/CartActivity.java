@@ -75,34 +75,35 @@ public class CartActivity extends ProdActivityTemplate {
     }
 
     public void PlaceOrder(View v){
+        int totalnum = 0;
         for(ProductDTO p : Products){
             System.out.println(p.getName() + " Cart: " + p.getNumInCart());
-
+            totalnum += p.getNumInCart();
 
         }
+        if(Products.size() > 0 && totalnum > 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setTitle("Order confirmation");
+            builder.setMessage("Are you sure you want to order this?");
+            builder.setPositiveButton("Confirm",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            PlaceOrderService POS = new PlaceOrderService(CartActivity.this, getUser());
+                            POS.PlaceOrder(CartActivity.this.Products);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle("Order confirmation");
-        builder.setMessage("Are you sure you want to order this?");
-        builder.setPositiveButton("Confirm",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        PlaceOrderService POS = new PlaceOrderService(CartActivity.this, getUser());
-                        POS.PlaceOrder(CartActivity.this.Products);
+                        }
+                    });
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
 
-                    }
-                });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
 
     }
 

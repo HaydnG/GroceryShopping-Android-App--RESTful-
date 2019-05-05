@@ -5,11 +5,14 @@
  */
 package uk.co.HaydnG.DTO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  *
  * @author haydn
  */
-public class StoreDTO {
+public class StoreDTO  implements Parcelable {
     
     private int ID;
     private String Name;
@@ -50,7 +53,35 @@ public class StoreDTO {
     public void setAddress(AddressDTO Address) {
         this.Address = Address;
     }
-    
-    
-    
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.ID);
+        dest.writeString(this.Name);
+        dest.writeParcelable(this.Address, flags);
+    }
+
+    protected StoreDTO(Parcel in) {
+        this.ID = in.readInt();
+        this.Name = in.readString();
+        this.Address = in.readParcelable(AddressDTO.class.getClassLoader());
+    }
+
+    public static final Creator<StoreDTO> CREATOR = new Creator<StoreDTO>() {
+        @Override
+        public StoreDTO createFromParcel(Parcel source) {
+            return new StoreDTO(source);
+        }
+
+        @Override
+        public StoreDTO[] newArray(int size) {
+            return new StoreDTO[size];
+        }
+    };
 }

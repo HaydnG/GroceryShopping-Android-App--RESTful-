@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.uk.R;
 
+import uk.co.HaydnG.Activity.MainActivity;
 import uk.co.HaydnG.Activity.Template.ActivityTemplate;
 import uk.co.HaydnG.Activity.CartActivity;
 import uk.co.HaydnG.Activity.HomeActivity;
@@ -108,6 +109,12 @@ public class Navigation {
                         intent = new Intent(App, HomeActivity.class);
                         App.startActivity(intent);
                         break;
+                    case R.id.logout:
+                        intent = new Intent(App, MainActivity.class);
+                        App.startActivity(intent);
+
+                        break;
+
                 }
 
                 if(intent != null){
